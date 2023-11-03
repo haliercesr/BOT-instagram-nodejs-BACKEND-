@@ -3,6 +3,7 @@
 const { Router } = require('express');
 const publicationsRouter=require('./publicationsRouter');
 const commentsRouter=require('./commentsRouter');
+const webhookRouter=require('./webhookRouter');
 
 
 const mainRouter = Router();
@@ -10,5 +11,7 @@ const mainRouter = Router();
 mainRouter.use("/publications",publicationsRouter);
 
 mainRouter.use("/comments",commentsRouter);
+
+mainRouter.use("/webhook",webhookRouter);
 
 module.exports = mainRouter;
