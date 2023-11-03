@@ -4,10 +4,12 @@ const { Sequelize } = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, DATABASE
+  DATABASEURL
+  //DB_USER, DB_PASSWORD, DB_HOST, DATABASE
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DATABASE}`, {
+const sequelize = new Sequelize(`${DATABASEURL}`, {
+//const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DATABASE}`, {
   logging: false, 
   native: false, 
   quoteIdentifiers: false, // Desactivar comillas dobles, con PI-DOGS no fue necesario hacer esto
