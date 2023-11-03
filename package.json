@@ -7,7 +7,8 @@
     "server": "nodemon index.js",
     "api": "echo 'Local API listening on PORT 5000' & json-server --watch api/db.json -p 5000 -q",
     "start": "concurrently \"npm run server\" \"npm run api\"",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "generate-certs": "mkcert  localhost 127.0.0.1"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "mkcert": "^3.1.0",
     "supertest": "^6.3.3"
   }
 }
