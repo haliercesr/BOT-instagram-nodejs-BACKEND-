@@ -5,7 +5,8 @@ const {
 
 
 const getwebhookVerifyRouterHandler=async(req,res)=>{ 
- 
+ console.log(req.query)
+ console.log(req.body)
   // Parse the query params
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
