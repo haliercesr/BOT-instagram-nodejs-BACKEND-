@@ -40,7 +40,7 @@ const postWebhookHandler= async (req, res) => {
     
 // Send a 200 OK response if this is a page webhook
 
-if (body.object === "page") {
+if (body.object === "instagram") {
 // Returns a '200 OK' response to all requests
 res.status(200).send("EVENT_RECEIVED");
 
