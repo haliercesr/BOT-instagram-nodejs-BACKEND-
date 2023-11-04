@@ -1,7 +1,7 @@
 const axios = require("axios");
 const server = require("./src/server");
 const { conn } = require('./src/db.js');
-const PORT = 443;
+/*const PORT = 443;
 const { createCA, createCert } = require("mkcert");
 const fs = require('fs');
 const https = require('https');
@@ -41,4 +41,12 @@ httpsServer.listen(PORT, () => {
 }).catch(error => console.error(error))
 }
 
-startServer()
+startServer()*/
+
+const PORT = 3004
+conn.sync({ force: false }).then(() => {
+  server.listen(PORT, () => {
+    console.log(`Server with HTTPS listening on port ${PORT}`) ;
+  })
+  }).catch(error => console.error(error))
+  
