@@ -47,7 +47,7 @@ const field =body.entry[0].changes[0].field?body.entry[0].changes[0].field:null;
 const media =body.entry[0].changes[0].value.media.media_product_type?body.entry[0].changes[0].value.media.media_product_type:null;
 
 if(field &&  field==="comments" && media && media==="FEED"){
-const idcomment=body.entry[0].changes[0].id
+const idcomment=body.entry[0].changes[0].value.id
 response= await postComment(idcomment);
 console.log(idcomment)
 
