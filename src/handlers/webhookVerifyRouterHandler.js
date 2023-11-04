@@ -43,11 +43,11 @@ const postWebhookHandler= async (req, res) => {
 if (body.object === "instagram") {
 // Returns a '200 OK' response to all requests
 
-const field =body.object.changes[0].field?body.object.changes[0].field:null;
-const media =body.object.changes[0].value.media.media_product_type?body.object.changes[0].value.media.media_product_type:null;
+const field =body.entry[0].changes[0].field?body.entry[0].changes[0].field:null;
+const media =body.entry[0].changes[0].value.media.media_product_type?body.entry[0].changes[0].value.media.media_product_type:null;
 
 if(field &&  field==="comments" && media && media==="FIELD"){
-const idcomment=body.object.changes[0].id
+const idcomment=body.entry[0].changes[0].id
 response= await postComment(idcomment);
 console.log(idcomment)
 
