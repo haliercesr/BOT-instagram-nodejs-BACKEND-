@@ -49,7 +49,7 @@ const media =body.entry[0].changes[0].value.media.media_product_type?body.entry[
 if(field &&  field==="comments" && media && media==="FEED"){
 const idcomment=body.entry[0].changes[0].value.id
 response= await postComment(idcomment);
-console.log(idcomment)
+console.log(response)
 
 return res.status(200).send("EVENT_RECEIVED");
 
