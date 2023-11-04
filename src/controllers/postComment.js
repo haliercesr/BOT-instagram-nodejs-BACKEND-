@@ -9,8 +9,9 @@ const {
 const postComment= async(idcomment)=>{ 
   try{
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
+    const message = "Olá, seu link foi enviado obrigado!"
     console.log(idcomment,"w")
-    const idReply=(await axios.post(`${URLAPIfacebook}/${versionApi}/${idcomment}/replies?message=Obrigado&access_token=${accessToken}`)).data;
+    const idReply=(await axios.post(`${URLAPIfacebook}/${versionApi}/${idcomment}/replies?message=${message}${emoji}&access_token=${accessToken}`)).data;
     
    
     return idReply
