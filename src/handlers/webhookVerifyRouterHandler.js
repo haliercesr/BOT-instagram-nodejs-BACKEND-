@@ -41,7 +41,7 @@ res.status(200).json(body);
 //} else {
 // Return a '404 Not Found' if event is not from a page subscription
 //res.sendStatus(404);
-}
+//}
 
 } catch (error) {
     console.log(error.message)
