@@ -1,3 +1,4 @@
+const { postWebhook } = require('../controllers/postWebhook');
 require("dotenv").config();
 const {
     verifyToken
@@ -5,8 +6,7 @@ const {
 
 
 const getwebhookVerifyRouterHandler=async(req,res)=>{ 
- console.log(req.query)
- console.log(req.body)
+ 
   // Parse the query params
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
@@ -26,31 +26,40 @@ const getwebhookVerifyRouterHandler=async(req,res)=>{
     }
   }
 
+ 
+}
+
+const postWebhookHandler= async (req, res) => {
   try {
-   // response= await postWebhook();
+    response= await postWebhook();
     let body = req.body ;   
+
+    console.log(`\u{1F7EA} Received webhook:`);
+    console.dir(body, { depth: null });
 
     
 // Send a 200 OK response if this is a page webhook
 
-//if (body.object === "page") {
+if (body.object === "page") {
 // Returns a '200 OK' response to all requests
-res.status(200).json(body);
+res.status(200).send("EVENT_RECEIVED");
 
 // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
 
-//} else {
+} else {
 // Return a '404 Not Found' if event is not from a page subscription
-//res.sendStatus(404);
-//}
+res.sendStatus(404);
+}
 
 } catch (error) {
     console.log(error.message)
     res.status(400).json({error: error.message}); 
 }
-}
+};
 
 module.exports={
-    getwebhookVerifyRouterHandler}
+    getwebhookVerifyRouterHandler,
+    postWebhookHandler
+  }
 
 
