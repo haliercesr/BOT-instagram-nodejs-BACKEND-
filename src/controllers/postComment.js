@@ -1,14 +1,16 @@
 const axios = require('axios');
 const URLAPIfacebook=require('../configURL.js' )
 const {
-  accessToken
+  accessToken,versionApi
 } = process.env;
 
 //POST | /webhook
 
 const postComment= async(idcomment)=>{ 
   try{
-    const idReply=(await axios.get(`${URLAPIfacebook}/${idcomment}/replies?message=*Obrigado!!, enviamos-lhe uma mensagem privada*&access_token=${accessToken}`)).data;
+    const emoji = "\u{1F604}"; // Representa la carita feliz 😄
+
+    const idReply=(await axios.get(`${URLAPIfacebook}/${versionApi}/${idUserInstagram}/replies?message=Obrigado!, enviamos uma mensagem privada para você ${emoji}&access_token=${accessToken}`)).data;
     
    
     return idReply
