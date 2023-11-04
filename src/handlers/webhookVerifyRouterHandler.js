@@ -14,8 +14,8 @@ const getwebhookVerifyRouterHandler=async(req,res)=>{
   // Check if a token and mode is in the query string of the request
   if (mode && token) {
     // Check the mode and token sent is correct
-    console.log(verifyToken,token)
-    if (mode === "subscribe" && token === verifyToken) {
+    console.log(verifyToken)
+    if (mode === "subscribe" && token === 'dwe3434') {
       // Respond with the challenge token from the request
       console.log("WEBHOOK_VERIFIED");
       res.status(200).send(challenge);
