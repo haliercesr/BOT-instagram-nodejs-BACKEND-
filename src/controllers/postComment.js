@@ -1,6 +1,6 @@
 const axios = require('axios');
 const URLAPIfacebook=require('../configURL.js' )
-const { comments } = require('../db')
+const { Comments } = require('../db')
 //const URLdrivers = 'http://localhost:5000/drivers'
 const {
   accessTokenUser,versionApi,page_id,accessTokenPage
@@ -21,7 +21,7 @@ const postComment= async(idcomment,idClient,time)=>{
     //-----------------------------------
 
     //SE CONTESTA EL MENSAJE
-    const [createdComment,created]=await comments.findOrCreate({          //busca en la base de datos si existe el comentario                                                          //model query: busca segun las condiciones en where y si no las encuentra crea una entrada segun las condiciones. Luego devuelve la instancia creada o encontrada.Created tiene un valor booleano
+    const [createdComment,created]=await Comments.findOrCreate({          //busca en la base de datos si existe el comentario                                                          //model query: busca segun las condiciones en where y si no las encuentra crea una entrada segun las condiciones. Luego devuelve la instancia creada o encontrada.Created tiene un valor booleano
       where: { time },
   })
 
