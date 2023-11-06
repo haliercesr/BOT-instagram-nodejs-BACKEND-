@@ -9,8 +9,8 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        idComments: {
-            type: DataTypes.STRING,
+        timeComments: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
 

@@ -47,7 +47,8 @@ const postWebhookHandler = async (req, res) => {
       //VARIABLES PARA COMENTARIO EN UNA PUBLICACION
       const field = body.entry[0].changes[0].field ? body.entry[0].changes[0].field : null;
       const media = body.entry[0].changes[0].value.media.media_product_type ? body.entry[0].changes[0].value.media.media_product_type : null;
-      const idClient = body.entry[0].changes[0].value.from.id ? body.entry[0].changes[0].value.from.id : null
+      const idClient = body.entry[0].changes[0].value.from.id ? body.entry[0].changes[0].value.from.id : null;
+      const time=body.entry[0].time ? body.entry[0].time : null;
       const textMessage = body.entry[0].changes[0].value.text ? body.entry[0].changes[0].value.text : null;
       const textMessageFormat = textMessage.toLowerCase()
       
@@ -65,8 +66,8 @@ const postWebhookHandler = async (req, res) => {
       if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero" ) {
         const idcomment = body.entry[0].changes[0].value.id ? body.entry[0].changes[0].value.id : null
 
-        if (textMessageFormat==="eu quero") response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
-        console.log(response)
+        response = await postComment(idcomment,idClient,time);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
+       
 
         if (response===true) return res.status(200).send("EVENT_RECEIVED");
 

@@ -1,5 +1,6 @@
 const axios = require('axios');
 const URLAPIfacebook=require('../configURL.js' )
+const { comments } = require('../db')
 //const URLdrivers = 'http://localhost:5000/drivers'
 const {
   accessTokenUser,versionApi,page_id,accessTokenPage
@@ -7,12 +8,12 @@ const {
 
 //POST | /webhook
 
-const postComment= async(idcomment,idClient)=>{ 
+const postComment= async(idcomment,idClient,time)=>{ 
   try{
     
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
     const message = "Olá, seu link foi enviado obrigado!"
-    console.log(idClient)
+    
 
     //DATOS DE TODOS LOS REELS PUBLICADOS
     //const response1=await axios.get(`${URLdrivers}`)
@@ -20,14 +21,23 @@ const postComment= async(idcomment,idClient)=>{
     //-----------------------------------
 
     //SE CONTESTA EL MENSAJE
+    const [createdComment,created]=await comments.findOrCreate({          //busca en la base de datos si existe el comentario                                                          //model query: busca segun las condiciones en where y si no las encuentra crea una entrada segun las condiciones. Luego devuelve la instancia creada o encontrada.Created tiene un valor booleano
+      where: { time },
+  })
+
+   if(created){
     const idReply=(await axios.post(`${URLAPIfacebook}/${versionApi}/${idcomment}/replies?message=${message}${emoji}&access_token=${accessTokenUser}`)).data;
+   
+
     //----------------------
     
     //SE ENVIA UN MENSAJE POR PRIVADO CON EL LINK
     const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message={text:'Hola, te dejamos el link: www.ejemplo.com'}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;
-    
+    console.log(response)
+
+   }
    
-    return true
+    return created
 
    }catch(error){
     console.log("error en el postcomment")
