@@ -75,7 +75,7 @@ const postWebhookHandler = async (req, res) => {
       } else {
         // Return a '404 Not Found' if event is not from a page subscription
 
-        res.status(200).send("EVENT_RECEIVED, no corresponde a un reel");
+        return res.status(200).send("EVENT_RECEIVED, no corresponde a un reel");
         
       }
       //--------------------------------
