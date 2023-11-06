@@ -62,7 +62,7 @@ const postWebhookHandler = async (req, res) => {
 
 
       //RESPUESTA A COMENTARIO "EU QUERO"
-      if (field && field === "comments" && media === "REELS" && (textMessageFormat === "eu quero" || textMessageFormat==='Olá, seu link foi enviado obrigado!😄')) {
+      if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero" ) {
         const idcomment = body.entry[0].changes[0].value.id ? body.entry[0].changes[0].value.id : null
 
         response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
@@ -72,12 +72,7 @@ const postWebhookHandler = async (req, res) => {
 
         // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
 
-      } else {
-        // Return a '404 Not Found' if event is not from a page subscription
-
-        return res.status(200).send("EVENT_RECEIVED, no corresponde a un reel");
-        
-      }
+      } 
       //--------------------------------
 
      /* //RESPUESTA A UN MESAJE DIRECTO POR INSTAGRAM DIRECT
@@ -96,9 +91,9 @@ const postWebhookHandler = async (req, res) => {
       }*/
       //--------------------------------------------------
 
-      return res.status(200).send("EVENT_RECEIVED");
+      return res.sendStatus(404)
     }
-
+    return res.sendStatus(404)
   } catch (error) {
     console.log(error.message)
     console.log("error en el Handler")
