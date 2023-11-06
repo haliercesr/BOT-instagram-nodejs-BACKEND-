@@ -54,9 +54,9 @@ const postWebhookHandler = async (req, res) => {
 
 
       //VARIABLES PARA EL MENSAJE BIENVENIDA EN INSTAGRAM DIRECT
-      const idDestinatarioPSID=body.entry[0].messaging[0].sender.id ? body.entry[0].messaging[0].sender.id : null
+      /*const idDestinatarioPSID=body.entry[0].messaging[0].sender.id ? body.entry[0].messaging[0].sender.id : null
       const textMessagePSID=body.entry[0].messaging[0].message.text ? body.entry[0].messaging[0].message.text : null
-      const textMessagePSIDFormat = textMessage.toLowerCase()
+      const textMessagePSIDFormat = textMessage.toLowerCase()*/
       //--------------------------------------------------------
 
 
@@ -77,7 +77,7 @@ const postWebhookHandler = async (req, res) => {
       }
       //--------------------------------
 
-      //RESPUESTA A UN MESAJE DIRECTO POR INSTAGRAM DIRECT
+     /* //RESPUESTA A UN MESAJE DIRECTO POR INSTAGRAM DIRECT
         if (idDestinatarioPSID && textMessagePSIDFormat === "hola") {
         const idcomment = body.entry[0].changes[0].value.id
         response = await postComment(idcomment);
@@ -90,7 +90,7 @@ const postWebhookHandler = async (req, res) => {
       } else {
         // Return a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
-      }
+      }*/
       //--------------------------------------------------
 
       return res.status(200).send("EVENT_RECEIVED");
