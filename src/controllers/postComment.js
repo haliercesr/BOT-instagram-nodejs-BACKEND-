@@ -9,6 +9,8 @@ const {
 
 const postComment= async(idcomment,idClient)=>{ 
   try{
+    const {reelsInstagramDB}=await axios.get(`${URLdrivers}`)
+    console.log(reelsInstagramDB)
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
     const message = "Olá, seu link foi enviado obrigado!"
     console.log(idClient)
