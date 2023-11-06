@@ -26,6 +26,7 @@ const postComment= async(idcomment,idClient)=>{
     return true
 
    }catch(error){
+    console.log("error en el postcomment")
        throw error;
    }
 }

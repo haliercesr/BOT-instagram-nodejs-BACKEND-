@@ -73,7 +73,9 @@ const postWebhookHandler = async (req, res) => {
 
       } else {
         // Return a '404 Not Found' if event is not from a page subscription
+        console.log("error en la respuesta al comentario")
         res.sendStatus(404);
+        
       }
       //--------------------------------
 
@@ -98,6 +100,7 @@ const postWebhookHandler = async (req, res) => {
 
   } catch (error) {
     console.log(error.message)
+    console.log("error en el Handler")
     res.status(400).json({ error: error.message });
   }
 
