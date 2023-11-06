@@ -65,7 +65,7 @@ const postWebhookHandler = async (req, res) => {
       if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero" ) {
         const idcomment = body.entry[0].changes[0].value.id ? body.entry[0].changes[0].value.id : null
 
-        response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
+        if (textMessageFormat==="eu quero") response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
         console.log(response)
 
         if (response===true) return res.status(200).send("EVENT_RECEIVED");
