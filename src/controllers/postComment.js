@@ -1,6 +1,6 @@
 const axios = require('axios');
 const URLAPIfacebook=require('../configURL.js' )
-const URLdrivers = 'http://localhost:5000/drivers'
+//const URLdrivers = 'http://localhost:5000/drivers'
 const {
   accessTokenUser,versionApi,page_id,accessTokenPage
 } = process.env;
@@ -9,11 +9,15 @@ const {
 
 const postComment= async(idcomment,idClient)=>{ 
   try{
-    const response1=await axios.get(`${URLdrivers}`)
-    console.log(response1)
+    
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
     const message = "Olá, seu link foi enviado obrigado!"
     console.log(idClient)
+
+    //DATOS DE TODOS LOS REELS PUBLICADOS
+    //const response1=await axios.get(`${URLdrivers}`)
+    //console.log(response1)
+    //-----------------------------------
 
     //SE CONTESTA EL MENSAJE
     const idReply=(await axios.post(`${URLAPIfacebook}/${versionApi}/${idcomment}/replies?message=${message}${emoji}&access_token=${accessTokenUser}`)).data;
