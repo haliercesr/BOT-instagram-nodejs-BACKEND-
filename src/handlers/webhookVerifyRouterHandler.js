@@ -50,6 +50,7 @@ const postWebhookHandler = async (req, res) => {
       const idClient = body.entry[0].changes[0].value.from.id ? body.entry[0].changes[0].value.from.id : null
       const textMessage = body.entry[0].changes[0].value.text ? body.entry[0].changes[0].value.text : null;
       const textMessageFormat = textMessage.toLowerCase()
+      const parent_id = body.entry[0].changes[0].value.parent_id ? body.entry[0].changes[0].value.parent_id : null
       //---------------------------------------------
 
 
@@ -61,7 +62,7 @@ const postWebhookHandler = async (req, res) => {
 
 
       //RESPUESTA A COMENTARIO "EU QUERO"
-      if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero") {
+      if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero" && !parent_id) {
         const idcomment = body.entry[0].changes[0].value.id ? body.entry[0].changes[0].value.id : null
 
         response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK

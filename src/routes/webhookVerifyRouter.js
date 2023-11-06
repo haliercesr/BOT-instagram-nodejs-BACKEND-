@@ -3,7 +3,7 @@ const{getwebhookVerifyRouterHandler,postWebhookHandler}=require('../handlers/web
 
 const webhookVerifyRouter = Router();
 
-webhookVerifyRouter.get('/',getwebhookVerifyRouterHandler); 
+//webhookVerifyRouter.get('/',getwebhookVerifyRouterHandler);  //CUANDO SE VERIFICA LA RUTA
 webhookVerifyRouter.post('/',postWebhookHandler);
 
 module.exports = webhookVerifyRouter;
