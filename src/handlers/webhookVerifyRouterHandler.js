@@ -1,12 +1,13 @@
+const { response } = require('express');
 const { postComment } = require('../controllers/postComment');
 require("dotenv").config();
 const {
-    verifyToken
+  verifyToken
 } = process.env;
 
 
-const getwebhookVerifyRouterHandler=async(req,res)=>{ 
- 
+const getwebhookVerifyRouterHandler = async (req, res) => {
+
   // Parse the query params
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
@@ -26,53 +27,85 @@ const getwebhookVerifyRouterHandler=async(req,res)=>{
     }
   }
 
- 
+
 }
 
-const postWebhookHandler= async (req, res) => {
+const postWebhookHandler = async (req, res) => {
   try {
-    
-    let body = req.body ;   
+
+    let body = req.body;
 
     console.log(`\u{1F7EA} Received webhook:`);
     console.dir(body, { depth: null });
 
-    
-// Send a 200 OK response if this is a page webhook
 
-if (body.object === "instagram") {
-// Returns a '200 OK' response to all requests
+    // Send a 200 OK response if this is a page webhook
 
-const field =body.entry[0].changes[0].field?body.entry[0].changes[0].field:null;
-const media =body.entry[0].changes[0].value.media.media_product_type?body.entry[0].changes[0].value.media.media_product_type:null;
-const textMessage=body.entry[0].changes[0].value.text
-const textMessageFormat=textMessage.toLowerCase()
+    if (body.object === "instagram") {
+      // Returns a '200 OK' response to all requests
+      
+      //VARIABLES PARA COMENTARIO EN UNA PUBLICACION
+      const field = body.entry[0].changes[0].field ? body.entry[0].changes[0].field : null;
+      const media = body.entry[0].changes[0].value.media.media_product_type ? body.entry[0].changes[0].value.media.media_product_type : null;
+      const idClient = body.entry[0].changes[0].value.from.id ? body.entry[0].changes[0].value.from.id : null
+      const textMessage = body.entry[0].changes[0].value.text ? body.entry[0].changes[0].value.text : null;
+      const textMessageFormat = textMessage.toLowerCase()
+      //---------------------------------------------
 
-if (field && field === "comments" && media && (media === "FEED" || media === "REELS") && textMessageFormat === "eu quero"){
-const idcomment=body.entry[0].changes[0].value.id
-response= await postComment(idcomment);
-console.log(response)
 
-return res.status(200).send("EVENT_RECEIVED");
+      //VARIABLES PARA EL MENSAJE BIENVENIDA EN INSTAGRAM DIRECT
+      const idDestinatarioPSID=body.entry[0].messaging[0].sender.id ? body.entry[0].messaging[0].sender.id : null
+      const textMessagePSID=body.entry[0].messaging[0].message.text ? body.entry[0].messaging[0].message.text : null
+      const textMessagePSIDFormat = textMessage.toLowerCase()
+      //--------------------------------------------------------
 
-// Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
 
-} else {
-// Return a '404 Not Found' if event is not from a page subscription
-res.sendStatus(404);
-}
-}
+      //RESPUESTA A COMENTARIO "EU QUERO"
+      if (field && field === "comments" && media === "REELS" && textMessageFormat === "eu quero") {
+        const idcomment = body.entry[0].changes[0].value.id
 
-} catch (error) {
+        response = await postComment(idcomment,idClient);  //CONTESTA EL COMENTARIO Y ENVIA UN MENSAJE POR PRIVADO CON EL LINK
+        console.log(response)
+
+        if (response===true) return res.status(200).send("EVENT_RECEIVED");
+
+        // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
+
+      } else {
+        // Return a '404 Not Found' if event is not from a page subscription
+        res.sendStatus(404);
+      }
+      //--------------------------------
+
+      //RESPUESTA A UN MESAJE DIRECTO POR INSTAGRAM DIRECT
+        if (idDestinatarioPSID && textMessagePSIDFormat === "hola") {
+        const idcomment = body.entry[0].changes[0].value.id
+        response = await postComment(idcomment);
+        console.log(response)
+
+        return res.status(200).send("EVENT_RECEIVED");
+
+        // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
+
+      } else {
+        // Return a '404 Not Found' if event is not from a page subscription
+        res.sendStatus(404);
+      }
+      //--------------------------------------------------
+
+      return res.status(200).send("EVENT_RECEIVED");
+    }
+
+  } catch (error) {
     console.log(error.message)
-    res.status(400).json({error: error.message}); 
-}
+    res.status(400).json({ error: error.message });
+  }
 
 };
 
-module.exports={
-    getwebhookVerifyRouterHandler,
-    postWebhookHandler
-  }
+module.exports = {
+  getwebhookVerifyRouterHandler,
+  postWebhookHandler
+}
 
 
