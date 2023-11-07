@@ -1,6 +1,6 @@
 const axios = require('axios');
 const URLAPIfacebook=require('../configURL.js' )
-const { Comments } = require('../db')
+const { Comments } = require('../db.js')
 //const URLdrivers = 'http://localhost:5000/drivers'
 const {
   accessTokenUser,versionApi,page_id,accessTokenPage
