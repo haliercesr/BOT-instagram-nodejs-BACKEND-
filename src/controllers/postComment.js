@@ -32,7 +32,7 @@ const postComment= async(idcomment,idClient,time)=>{
     //----------------------
     
     //SE ENVIA UN MENSAJE POR PRIVADO CON EL LINK
-    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message={text:'Hola, te dejamos el link: www.ejemplo.com'}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;
+    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message={text:'Olá, deixamos o link: Dieta Flexivel https://sun.eduzz.com/1871350?a=58504888  Desafio 21 dias https://p.eduzz.com/651322?a=58504888'}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;
     console.log(response)
 
    }
