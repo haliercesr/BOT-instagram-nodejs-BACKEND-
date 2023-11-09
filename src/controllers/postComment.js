@@ -14,7 +14,7 @@ const postComment= async(idcomment,idClient,time)=>{
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
     const message = "Olá, seu link foi enviado obrigado!"
 
-    const messagePrivate={
+    const messagePrivate=`{
       "attachment":{
         "type":"template",
         "payload":{
@@ -43,7 +43,7 @@ const postComment= async(idcomment,idClient,time)=>{
           ]
         }
       }
-    }
+    }`
     
 
     //DATOS DE TODOS LOS REELS PUBLICADOS
