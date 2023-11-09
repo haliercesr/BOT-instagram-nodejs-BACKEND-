@@ -14,7 +14,7 @@ const postComment= async(idcomment,idClient,time)=>{
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
     const message = "Olá, seu link foi enviado obrigado!"
 
-    const messagePrivate=`{
+    const messagePrivate={
       "attachment":{
         "type":"template",
         "payload":{
@@ -43,7 +43,7 @@ const postComment= async(idcomment,idClient,time)=>{
           ]
         }
       }
-    }`
+    }
     
 
     //DATOS DE TODOS LOS REELS PUBLICADOS
@@ -63,7 +63,7 @@ const postComment= async(idcomment,idClient,time)=>{
     //----------------------
     
     //SE ENVIA UN MENSAJE POR PRIVADO CON EL LINK
-    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message=${messagePrivate}}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;  //'Olá, deixamos o link: Dieta Flexivel https://sun.eduzz.com/1871350?a=58504888  Desafio 21 dias https://p.eduzz.com/651322?a=58504888
+    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message=${messagePrivate}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;  //'Olá, deixamos o link: Dieta Flexivel https://sun.eduzz.com/1871350?a=58504888  Desafio 21 dias https://p.eduzz.com/651322?a=58504888
     console.log(response)
 
    }
