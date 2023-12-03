@@ -57,6 +57,7 @@ const postComment= async(idcomment,idClient,time)=>{
   })
 
    if(created){
+    console.log(idcomment)
     const idReply=(await axios.post(`${URLAPIfacebook}/${versionApi}/${idcomment}/replies?message=${message}${emoji}&access_token=${accessTokenUser}`)).data;
    
 
