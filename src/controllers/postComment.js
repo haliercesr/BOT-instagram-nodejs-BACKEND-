@@ -12,7 +12,7 @@ const postComment= async(idcomment,idClient,time)=>{
   try{
     
     const emoji = "\u{1F604}"; // Representa la carita feliz 😄
-    const message = "Olá, seu link foi enviado obrigado!"
+    const message = "Hola, te hemos enviado el link. Gracias😄"
 
     const messagePrivate={
       "attachment":{
