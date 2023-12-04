@@ -64,7 +64,7 @@ const postComment= async(idcomment,idClient,time)=>{
     //----------------------
     
     //SE ENVIA UN MENSAJE POR PRIVADO CON EL LINK
-    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message={text:"Holaaa 😄, el link de la maquina de bolas de masa es: https://amzn.to/3RuAAvC"}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;  //'Olá, deixamos o link: Dieta Flexivel https://sun.eduzz.com/1871350?a=58504888  Desafio 21 dias https://p.eduzz.com/651322?a=58504888
+    const response=(await axios.post(`${URLAPIfacebook}/${versionApi}/${page_id}/messages?recipient={id:${idClient}}&message={text:"Holaaa 😄, link de Amazon de la maquina de bolas de masa: https://amzn.to/3RuAAvC"}&messaging_type=RESPONSE&access_token=${accessTokenPage}`)).data;  //'Olá, deixamos o link: Dieta Flexivel https://sun.eduzz.com/1871350?a=58504888  Desafio 21 dias https://p.eduzz.com/651322?a=58504888
     console.log(response)
 
    }
